@@ -1,0 +1,9 @@
+
+
+
+Screen('FillRect', Window, [128 128 128], [wWidth/2-ceil(0.1562*wWidth) wHeight/2-ceil(0.0926*wHeight) ceil(0.3125*wWidth)+wWidth/2-ceil(0.1562*wWidth)  ceil(0.1852*wHeight)+wHeight/2-ceil(0.0926*wHeight)]);
+
+
+Screen('FillRect', Window, [128 128 128], [wWidth/2-(0.1562*wWidth) wHeight/2-(0.0926*wHeight) (0.3125*wWidth)+wWidth/2-(0.1562*wWidth)  (0.1852*wHeight)+wHeight/2-(0.0926*wHeight)]);
+
+Screen('Flip', Window);

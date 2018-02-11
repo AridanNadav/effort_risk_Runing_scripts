@@ -1,0 +1,175 @@
+function [SelfPower]=BB_MVC(Window,instrct_calibration,instrct_dont_squeez,instrunt_recalib,instrct_squeez)
+
+%--------------------------------------------------------------
+% grip calibration- get subject's MVC by avarege of 3 sqeezes
+
+CalibDur = 4;
+sustainTime=1;
+mSR=   34.4828;
+
+% Show Instructions
+Screen('PutImage',Window,instrct_calibration);
+Screen(Window,'Flip');
+%KbQueueFlush;
+%KbQueueStart;
+WaitSecs(0.5);
+
+wait4key
+% ###
+daq=DaqDeviceIndex;
+devices=PsychHID('Devices');
+Achan = 8; Arange = 1;
+
+
+%% squeeze time
+CalibDone = 0;
+while ~CalibDone
+    
+    vcal=cell(4,1);
+    
+    % first relax baseline
+    OK_relax = 0;
+    while ~OK_relax
+        
+        ctr1 = 1;
+        
+        Screen('PutImage',Window,instrct_dont_squeez);
+        Screen(Window,'Flip');
+        %    CurrMsg = CalibMsg{1};
+        %   DrawFormattedText(Window,CurrMsg,'center','center',CalibColor{1});
+        
+        
+        CalOnTime = GetSecs; % Get the current cloack's seconds.
+        
+        while (GetSecs - CalOnTime) <= CalibDur
+            
+            % Creates a vector containing the voltage at each sumple -
+            % According to a prefixed sumpling rate.
+            measure1(1,ctr1) = DaqAIn(daq,Achan,Arange);
+            measure1(2,ctr1)=GetSecs - CalOnTime;
+            ctr1 = ctr1 + 1;
+            vcal{1}=measure1;
+        end
+        % To make sure the subject doesnt squeeze during the relax phase.
+        
+        
+        % if max(measure1)>=1.65
+        if max(measure1)>=0.2
+            Screen('PutImage',Window,instrunt_recalib);
+            Screen(Window,'Flip');
+            WaitSecs(2)
+        else OK_relax=1;
+        end
+    end
+    
+    
+    for i=2:4
+        
+        Screen('PutImage',Window,instrct_squeez);
+        Screen(Window,'Flip');
+        % CurrMsg = CalibMsg{2};
+        %  DrawFormattedText(Window,CurrMsg,'center','center',CalibColor{2});
+        
+        ctr = 1;
+        
+        CalOnTime = GetSecs; % Get the current cloack's seconds.
+        measure=[];
+        while (GetSecs - CalOnTime) <= CalibDur
+            
+            % Creates a vector containing the voltage at each sumple -
+            % According to a prefixed sumpling rate.
+            measure(1,ctr) = DaqAIn(daq,Achan,Arange);
+            measure(2,ctr)=GetSecs - CalOnTime;
+            ctr = ctr + 1;
+            vcal{i}=measure;
+        end
+        
+        CalOnTime = GetSecs; % Get the current cloack's seconds.
+        Screen('PutImage',Window,instrct_dont_squeez);
+        Screen(Window,'Flip');
+        while (GetSecs - CalOnTime) <= CalibDur
+        end
+        
+    end
+    
+    Screen('Flip',Window);
+    
+    
+    %% calculate largest sustained v over 3 secs
+%     for delta=1:length(vcal{2})-1
+%     SR(delta)=measure(2,delta+1)-measure(2,delta);
+%     end
+    
+%     mSR=mean(SR);
+endvec=sustainTime*1000/ mSR    ;
+for trys=2:4
+squeezVEC=vcal{trys};
+    maxcals=zeros(3,1);
+    for imax=1: (length(squeezVEC(1,:))-endvec)
+ currentMAX=min(vcal{2,imax:imax+endvec})
+            
+            
+            
+    end
+end
+    maxcals=[maxcal,maxcal,maxcal];
+            
+            MaxCal=mean (maxcals);
+            
+            MinCal = max(vcal{1});
+            
+            
+            
+            % fix num2str(vcal{2:end});
+            
+            % SelfPower is the max grip of the subject minus the noise.
+            SelfPower=(MaxCal-MinCal);
+            % ScaleFactor divides the dynamic part of the screen to subject's grip
+            % range units.
+            % ! ScaleFactor =ActiveRange/SelfPower;
+            
+            %     fid4 = fopen([outputPath '/' subjectID '_grip_cal' timestamp '.txt'],'a'); %#################
+            %     fprintf(fid4,'Min\t Max_Vec\t max\t Self_Power\n'); %#################
+            %     fprintf(fid4,'%d\t %s\t %d\t %d\n', MinCal, max_vec, MaxCal, SelfPower); %#################
+            %     fclose(fid4); %#################
+            
+            CalibOutMsg = ['Max grip: ' num2str(SelfPower)];
+            %     DrawFormattedText(Window,CalibOutMsg,'center','center',TextColor);
+            %     Screen('Flip',Window);
+            %     %    FlushEvents; %#####
+            %     %    KbQueueFlush;
+            %     %    KbQueueStart;
+            %     % Waits for keyboard input.
+            %     wait4key
+            
+            DrawFormattedText(Window,CalibOutMsg,'center','center',TextColor);
+            Screen('Flip',Window);
+            
+            KbQueueCreate()
+            KbQueueStart();%%start listening
+            KbQueueFlush();%%removes all keyboard presses
+            [ keyCode] = KbWait();
+            Response = KbName(keyCode);
+            %Response = Response(1);
+            while     ~ismember(Response,['y','Y','n','N'])
+                KbQueueCreate()
+                KbQueueStart();%%start listening
+                KbQueueFlush();%%removes all keyboard presses
+                [ keyCode] = KbWait();
+                Response = KbName(keyCode);
+                
+            end
+            if ismember(Response,['y','Y'])
+                CalibDone = 1;
+            end
+            
+            Screen('Flip',Window);
+            
+            
+        end
+        Screen('Flip',Window);
+        save ([pwd '/Output/' subjectID '_calib_parameters'],'vcal')
+        
+        
+        
+    end

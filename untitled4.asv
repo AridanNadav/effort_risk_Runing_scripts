@@ -1,0 +1,23 @@
+function []=BB_MVC()
+
+% introduction instruction
+Screen('PutImage',Window,instrct_introduction);
+Screen(Window,'Flip');
+WaitSecs(2);
+wait4key % wait for any key press to continue
+
+effort_levels_setup;
+
+load_stim_for_practice
+
+load([pwd '/Onset_files/onsets.mat'])
+
+AA_Screen_Set_n_Open
+runNUM=1;       
+
+%--------------------------------------------------------------
+% grip calibration- get subject's MVC by avarege of 3 sqeezes
+
+MRI_Grip_Calibration
+
+end

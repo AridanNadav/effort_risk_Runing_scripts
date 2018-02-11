@@ -1,0 +1,92 @@
+%888888888 8888888888 8888888888  d88888b   8888888b  88888888888         8888888b   8888888  d8888b   888    d8P  
+%88        888        888       d88P" "Y88b 888   Y88b    888             888   Y88b   888  d88P  Y88b 888   d8P   
+%88        888        888       888     888 888    888    888             888    888   888  Y88b       888  d8P    
+%888888    8888888    8888888   888     888 888   d88P    888             888   d88P   888   "Y888b    888d88K     
+%88        888        888       888     888 8888888P"     888   >>>>>>    8888888P"    888      "Y88b  8888888b    
+%88        888        888       888     888 888 T88b      888   <<<<<<    888 T88b     888        "888 888  Y88b   
+%88        888        888       Y88b   d88P 888  T88b     888             888  T88b    888  Y88b  d88P 888   Y88b  
+%888888888 888        888        "Y88888P"  888   T88b    888             888   T88b 8888888 "Y8888P"  888    Y88b 
+                                                                                                                     
+% ====================================== NADAV ARIDAN 2017 ==========================================================
+% This experiment is desigend for fMRI and operates effort-risk sensitivity and effort-aversion
+% Order of the experimennt:
+% 1 Effort practice
+%   1 1 MVC
+%   1 2 perceived effort 1
+%   1 3 Effort levels familiarization
+%   1 4 perceived effort 2
+% 2 Risk-sensitivity 
+% 3 Effort-sensitivity
+%                                       
+%   _ __  _ __ ___  ___  ___ __ _ _ __  
+%  | '_ \| '__/ _ \/ __|/ __/ _` | '_ \ 
+%  | |_) | | |  __/\__ \ (_| (_| | | | |
+%  | .__/|_|  \___||___/\___\__,_|_| |_|
+%  | |                                  
+%  |_|                                  
+%                                           :++~, =:::=:             ?NMMOOMM     
+%                                     ,,:   =: ,~~==MM888$   ~MMM8888DDDNMMMM     
+%                                   =~=+?? I?III=,~~=MMMMMMDD88NMMMMMMMMMMMMMN    
+%                            ,:,,:,~++++??N~D88O+?+=?ZMMMMMMMMMMMMMMMMMMMMMMMM    
+%                            :::~+777I?$ZMMMMMMZ?~+~=?MMMMMMMMMMMMMMMMMMMMMMMM    
+%                           7DDODMMMMMMMMMMMMMM8?+=:~=+MMMMMMMMMMMMMMMMMMMMMMMN   
+%                        NMMMMMMMMMMMMMMMMMMMMMM?+=~~===MMMMMMMMMMMMMMMMMMMMMMM   
+%                ZMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM7?+==++?8MMMMMMMMMMMMMMMMMMMMMM   
+%         ,NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8?++=??=IMMMMMMMMM      ~MMMMMM   
+%        OMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMZ?==~==IMMM            ZMMMMMN   
+%        ZMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMZI=~:~==8MM     :MMMMMMMMMMM     
+%        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM7+~:::~+MMMMMMMMMMMM:           
+%        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM7=::::~+MMMMM+                  
+%        NNNMMMMMMMMMMMMMMMMMMNMMMMMMMMMMMMMMMMMMMM7+~::::++M                      
+%         NMMMMMMMMMMM      ~ONMMMMMMMMMMMMMMMMMMM7+~~:::~=MM              
+%          MMMMMM           ZMMMMMMMMMMMMMMMMMMMM??~:~::::~~M                  
+%          8MMMMMD   =MMNMMMMMMMMMMMMMMMMMMMM====:~~:~::::~~M                     
+%           MMMMNNNNNMMMM8=DMMMMMMMMMMMMMMM=:::::::,~~::::~+N                     
+%            NMNMM7      :8MMMMMMMMMMMMMM+~:~:~:,::~~~~=~+77O                     
+%                        7MMMMMMMMMMMMMM7+~:::~~~~::===+?77?                      
+%                        IOMMMMN$7II$+?7+=~~=~::~~~~==++I$ZI                      
+%                        =??+~~~::==~~??+=~+~~=~~~~=~=+I$$7                       
+%                        ~~~::=~~=~=~~++=~~==++==~===??777                        
+%                        =~~:~~~=~~=~~7=+===++=~~===+?77I                         
+%                        ~~~~~~~:~~++==+?====++===+=?I77                          
+%                        ~~=~~~~~:~~====++=+=?~:==+?I7I                           
+%                         =+=~~~~~::~==~~~+=~====+?I7I                            
+%                         =+?+=~~~~=~~~:~::~:+=+++?7I                             
+%                         =?++=~~~:::~~~~~~~~==++?77                              
+%                          ~+=~::~=::~~~:::~++~=??O=                              
+%                          :~~:~~:::~:~~~:~~~~==+$O                               
+%                          :~~~~~::,::~~~~=~::~~?OI                               
+%                          ,:~~~:::~~~~~~~~:~~=~+O?                               
+                                   
+
+% run from ***/RISK1/Runing_scripts
+
+%%  pre_run_settings_and_personal_details
+clear all
+close all
+[Exp_path,outputPath,subjectID,Instructions_struct] = pre_run_settings_and_personal_details();
+
+% open screen 
+[Window,wWidth, wHeight,centerX, centerY]=AA_Screen_Set_n_Open;
+
+
+%% ========================================================================
+% MVC - get participant's Maximal Volentary Contraction
+% =========================================================================
+[]=BB_MVC()
+
+%% ========================================================================
+% perceived effort 1
+% =========================================================================
+
+
+
+%% ========================================================================
+%  Effort levels familiarization
+% =========================================================================
+
+ 
+
+%% ========================================================================
+% perceived effort 2
+% =========================================================================
